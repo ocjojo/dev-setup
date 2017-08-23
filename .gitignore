@@ -1,0 +1,24 @@
+*.sublime*
+.DS_Store
+.idea
+
+# Because this really is a working directory, ignore vagrant's files
+/.vagrant
+
+# Ignore the nvm git clone in the 'nvm' directory in config
+/config/nvm/*
+
+# Log files should be ignored.
+/log/**/*
+
+# No need to share our individual sites with each other
+/www/*
+!/www/default
+/www/default/*
+!/www/default/index.php
+!/www/default/phpinfo
+
+# Keep files/dirs with gitkeep
+!.gitkeep
+
+/config/nginx-config/local.dev.crt

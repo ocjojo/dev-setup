@@ -1,0 +1,12 @@
+# bash_profile
+#
+# Symlinked to the vagrant user's home directory. Use this
+# bash_profile to set environment variables and such.
+
+# bash_aliases
+
+alias fuck='sudo $(history -p \!\!)'
+alias nginx-restart='sudo bash /srv/config/reload-nginx.sh'
+alias swap-file='sudo bash /srv/config/swap-file.sh'
+
+export PS1="[\u@\h \W]\\$ "
