@@ -22,3 +22,6 @@
 !.gitkeep
 
 /config/nginx-config/local.dev.crt
+
+/config/nginx-config/sites/*
+!/config/nginx-config/sites/default

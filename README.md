@@ -11,12 +11,11 @@ This repository contains everything you need to setup a local web development en
 6. add `config/nginx-config/local.dev.crt` to your trusted certificates
 
 ## Troubleshooting
-If vagrant cannot mount the shared folders on first start-up, connect via `vagrant ssh` and enter the following commands:
-```shell
-sudo yum -y install kernel-devel
-sudo yum -y update
-```
-Afterwards call `vagrant reload --provision`
+Vagrant cannot mount shared folders.
+
+- Install `vagrant plugin install vagrant-vbguest`
+- run `vagrant vbguest`
+- run `vagrant reload`
 
 ## Usage
 
