@@ -76,6 +76,8 @@ yum_package_check_list=(
   # temporarily install http-parser directly, b/c of https://bugzilla.redhat.com/show_bug.cgi?id=1481470
   https://kojipkgs.fedoraproject.org//packages/http-parser/2.7.1/3.el7/x86_64/http-parser-2.7.1-3.el7.x86_64.rpm
 
+  # to build e.g. node modules
+  gcc-c++
   #to build newest guest additions
   kernel-devel
 )
@@ -169,9 +171,9 @@ tools_install() {
   curl -sL https://rpm.nodesource.com/setup_8.x | bash -
   yum install -y nodejs
   # install gulp
-  npm install -g gulp-cli
+  /usr/bin/npm install -g gulp-cli
   # install json-server for expa mock server
-  # npm install -g json-server
+  # /usr/bin/npm install -g json-server
 
   # create bin dir if it does not exist yet
   mkdir -p /usr/local/bin
