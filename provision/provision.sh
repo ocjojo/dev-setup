@@ -168,8 +168,10 @@ package_install() {
 
 tools_install() {
   # NODEJS
-  curl -sL https://rpm.nodesource.com/setup_8.x | bash -
-  yum install -y nodejs
+  if not_installed "nodejs"; then
+    curl -sL https://rpm.nodesource.com/setup_8.x | bash -
+    yum install -y nodejs
+  fi
   # install gulp
   /usr/bin/npm install -g gulp-cli
   # install json-server for expa mock server
@@ -189,14 +191,14 @@ tools_install() {
   # COMPOSER
   #
   # Install Composer if it is not yet available.
-  if [[ ! -n "$(composer --version --no-ansi | grep 'Composer version')" ]]; then
+  if [[ ! -n "$(/usr/local/bin/composer --version --no-ansi | grep 'Composer version')" ]]; then
     echo "Installing Composer..."
     curl -sS "https://getcomposer.org/installer" | php -- --install-dir=/usr/local/bin --filename=composer
   fi
 
   if [[ -f /vagrant/provision/github.token ]]; then
     ghtoken=`cat /vagrant/provision/github.token`
-    composer config --global github-oauth.github.com $ghtoken
+    /usr/local/bin/composer config --global github-oauth.github.com $ghtoken
     echo "Your personal GitHub token is set for Composer."
   fi
 
@@ -232,13 +234,15 @@ nginx_setup() {
     echo "$vvvgenrsa"
   fi
 
-  echo "Sign the certificate using the above root ca..."
-  vvvsigncert="$(openssl req -new -x509 \
-  -key /etc/nginx/ssl/server.key \
-  -out /etc/nginx/ssl/server.crt \
-  -days 730 \
-  -config /srv/config/san_config 2>&1)"
-  echo "$vvvsigncert"
+  if [[ ! -e /etc/nginx/ssl/server.crt ]]; then
+    echo "Sign the certificate using the above root ca..."
+    vvvsigncert="$(openssl req -new -x509 \
+    -key /etc/nginx/ssl/server.key \
+    -out /etc/nginx/ssl/server.crt \
+    -days 730 \
+    -config /srv/config/san_config 2>&1)"
+    echo "$vvvsigncert"
+  fi
 
   # change nginx user uid and gid, so vagrant permissions fit
   usermod -u 5000 nginx
