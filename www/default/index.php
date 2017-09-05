@@ -27,12 +27,19 @@
 <h3>Projects</h3>
 
 <ul class="nav">
+	<li><a href="https://local.dev" target="_blank">
+		local.dev
+	</a></li>
 	<?php 
-		$san_config = file_get_contents("/vagrant/config/san_config");
-		if(preg_match_all("/DNS\.[0-9]+\s*=\s*(.*)/", $san_config, $matches)){
-			foreach ($matches[1] as $i => $url) {?>
-			<li><a href="https://<?= $url ?>" target="_blank"><?= $url ?></a></li>
-			<?php }
+		if ($handle = opendir('/vagrant/config/nginx-config/sites')) {
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != ".." && $entry != "default") { ?>
+					<li><a href="https://<?= $entry ?>.local.dev" target="_blank">
+						<?= $entry ?>.local.dev
+					</a></li>
+				<?php }
+			}
+			closedir($handle);
 		}
 	?>
 </ul>

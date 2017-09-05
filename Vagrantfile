@@ -14,10 +14,14 @@ local_config['vm_config'] = Hash.new
 local_config['vm_config']['memory'] = 1024
 local_config['vm_config']['cores'] = 1
 
-# searches for host entries in san_config
-local_config['hosts'] += File.readlines(File.join(working_dir, 'config', 'san_config'))
-  .map(&:chomp)
-  .grep(/DNS\.[0-9]+\s*=\s*(.*)/){$1}
+# searches for host entries from sites dir
+def map_hosts(name)
+  var = name == "default" ? "local.dev" : name + ".local.dev"
+  return var
+end
+
+local_config['hosts'] += Dir[File.join(working_dir, 'config', 'nginx-config', 'sites', '*')]
+.map! {|f| map_hosts(f.split('/')[-1])}
 
 Vagrant.configure("2") do |config|
 
