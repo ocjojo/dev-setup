@@ -180,14 +180,6 @@ tools_install() {
   # create bin dir if it does not exist yet
   mkdir -p /usr/local/bin
 
-  # SYMFONY
-  # 
-  # Install symfony install tool, if not yet available
-  if [[ ! -f /usr/local/bin/symfony ]]; then
-    curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
-    chmod a+x /usr/local/bin/symfony
-  fi
-
   # COMPOSER
   #
   # Install Composer if it is not yet available.
@@ -210,6 +202,14 @@ tools_install() {
     COMPOSER_HOME=/usr/local/src/composer /usr/local/bin/composer -q global require phpunit/phpunit
     COMPOSER_HOME=/usr/local/src/composer /usr/local/bin/composer -q global config bin-dir /usr/local/bin
     COMPOSER_HOME=/usr/local/src/composer /usr/local/bin/composer global update
+  fi
+
+  # SYMFONY
+  # 
+  # Install symfony install tool, if not yet available
+  if [[ ! -f /usr/local/bin/symfony ]]; then
+    curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
+    chmod a+x /usr/local/bin/symfony
   fi
 }
 
