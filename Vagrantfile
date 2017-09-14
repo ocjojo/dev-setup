@@ -201,9 +201,12 @@ Vagrant.configure("2") do |config|
   # provision directory.
   config.vm.provision "default", type: "shell", path: File.join( "provision", "provision.sh" )
 
-  # Always start MariaDB/MySQL/PHP on boot, even when not running the full provisioner
   # (run: "always" support added in 1.6.0)
-  config.vm.provision :shell, inline: "sudo systemctl restart php-fpm", run: "always"
-  config.vm.provision :shell, inline: "sudo systemctl restart mariadb", run: "always"
-  config.vm.provision :shell, inline: "sudo systemctl restart nginx", run: "always"
+  config.vm.provision "shell", run: "always" do |s|
+    s.inline = <<-SHELL
+      echo "Restart services"
+      sudo systemctl restart php-fpm
+      sudo systemctl restart mariadb
+      sudo systemctl restart nginx
+    SHELL
 end
