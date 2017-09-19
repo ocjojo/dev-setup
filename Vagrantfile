@@ -209,4 +209,5 @@ Vagrant.configure("2") do |config|
       sudo systemctl restart mariadb
       sudo systemctl restart nginx
     SHELL
+  end
 end
