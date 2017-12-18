@@ -5,10 +5,10 @@ This repository contains everything you need to setup a local web development en
 
 1. Install VirtualBox: follow instructions on https://www.virtualbox.org/
 2. Install Vagrant: follow instructions on https://www.vagrantup.com/
-3. Install `vagrant plugin install vagrant-hostsupdater`
-4. Install `vagrant plugin install vagrant-vbguest`
-5. Install GIT.
-6. Clone this repo: `git clone git@github.com:ocjojo/dev-setup.git [optional name]`
+3. Install GIT.
+4. Clone this repo: `git clone git@github.com:ocjojo/dev-setup.git [optional name]`
+5. Install `vagrant plugin install vagrant-hostsupdater`
+6. Install `vagrant plugin install vagrant-vbguest`
 7. `vagrant up`, this takes a while the first time
 8. add `config/nginx-config/local.dev.crt` to your trusted certificates
 
