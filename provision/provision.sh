@@ -24,23 +24,12 @@ yum_package_install_list=()
 # status before adding them to the yum_package_install_list array.
 yum_package_check_list=(
 
-  # PHP7.1
-  #
-  # Our base packages for php7.1. As long as php7.1-fpm and php7.1-cli are
-  # installed, there is no need to install the general php7.1 package, which
-  # can sometimes install apache as a requirement.
+  # PHP
+  # use php56w-x or php71w-x
   php71w-fpm
   php71w-cli
 
-  # Common, see https://webtatic.com/packages/php71/
-  # contains php-api, php-bz2, php-calendar, php-ctype, 
-  # php-curl, php-date, php-exif, php-fileinfo, php-filter,
-  # php-ftp, php-gettext, php-gmp, php-hash, php-iconv, php-json,
-  # php-libxml, php-openssl, php-pcre, php-pecl-Fileinfo, php-pecl-phar,
-  # php-pecl-zip, php-reflection, php-session, php-shmop, php-simplexml,
-  # php-sockets, php-spl, php-tokenizer, php-zend-abi, php-zip, php-zlib
   php71w-common
-  # dev
   php71w-devel
 
   # Extra PHP modules that we find useful
