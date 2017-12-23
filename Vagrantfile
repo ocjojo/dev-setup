@@ -207,7 +207,7 @@ Vagrant.configure("2") do |config|
       echo "Restart services"
       sudo systemctl restart php-fpm
       sudo systemctl restart mariadb
-      sudo systemctl restart nginx
+      sudo bash /srv/config/reload-nginx.sh
     SHELL
   end
 end
